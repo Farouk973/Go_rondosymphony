@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CLignecommande%2523setIdCommande
+
+return [PHP_INT_MAX, []];
