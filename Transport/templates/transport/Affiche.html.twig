@@ -1,0 +1,33 @@
+{% extends 'index.html.twig' %}
+
+    {% block body %}
+<h1>Liste de Transport</h1>
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Prix</th>
+        <th>Type</th>
+        <th>Disponibilite</th>
+        <th>ID_groupe</th>
+        <th>Destination</th>
+        <th>Stock</th>
+        <th>Image</th>
+        <th>update</th>
+        <td>Delete</td>
+    </tr>
+    <tr {% for t in Transport%}>
+        <td>{{ t.Id }}</td>
+        <td>{{ t.PrixTr }}</td>
+        <td>{{ t.TypeTr }}</td>
+        <td>{{ t.DisponibiliteTr}}</td>
+        <td>{{ t.IdGroupeTr}}</td>
+        <td>{{ t.DestinationTr}}</td>
+        <td>{{ t.StockTr }}</td>
+        <td>{{ t.ImageTr }}</td>
+        <td><a href="{{ path('update',{'id':t.id}) }}">update</a></td>
+        <td><a href="{{ path('d',{'id':t.id}) }}">Delete</a></td>
+
+    </tr{% endfor %}>
+</table>
+{% endblock %}
