@@ -1,0 +1,70 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Participant{% endblock %}
+
+{% block body %}
+    <h1>Participant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdPar</th>
+                <td>{{ participant.idPar }}</td>
+            </tr>
+            <tr>
+                <th>CinPar</th>
+                <td>{{ participant.cinPar }}</td>
+            </tr>
+            <tr>
+                <th>NomPar</th>
+                <td>{{ participant.nomPar }}</td>
+            </tr>
+            <tr>
+                <th>PrenomPar</th>
+                <td>{{ participant.prenomPar }}</td>
+            </tr>
+            <tr>
+                <th>SexePar</th>
+                <td>{{ participant.sexePar }}</td>
+            </tr>
+            <tr>
+                <th>AgePar</th>
+                <td>{{ participant.agePar }}</td>
+            </tr>
+            <tr>
+                <th>UsernamePar</th>
+                <td>{{ participant.usernamePar }}</td>
+            </tr>
+            <tr>
+                <th>MdpPar</th>
+                <td>{{ participant.mdpPar }}</td>
+            </tr>
+            <tr>
+                <th>NumtelPar</th>
+                <td>{{ participant.numtelPar }}</td>
+            </tr>
+            <tr>
+                <th>AdressPar</th>
+                <td>{{ participant.adressPar }}</td>
+            </tr>
+            <tr>
+                <th>MailPar</th>
+                <td>{{ participant.mailPar }}</td>
+            </tr>
+            <tr>
+                <th>IdGroup</th>
+                <td>{{ participant.idGroup }}</td>
+            </tr>
+            <tr>
+                <th>DateInscri</th>
+                <td>{{ participant.dateInscri ? participant.dateInscri|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('participant_index') }}">back to list</a>
+
+    <a href="{{ path('participant_edit', {'idPar': participant.idPar}) }}">edit</a>
+
+    {{ include('participant/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Participant index{% endblock %}
+
+{% block body %}
+    <h1>Participant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPar</th>
+                <th>CinPar</th>
+                <th>NomPar</th>
+                <th>PrenomPar</th>
+                <th>SexePar</th>
+                <th>AgePar</th>
+                <th>UsernamePar</th>
+                <th>MdpPar</th>
+                <th>NumtelPar</th>
+                <th>AdressPar</th>
+                <th>MailPar</th>
+                <th>IdGroup</th>
+                <th>DateInscri</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participant in participants %}
+            <tr>
+                <td>{{ participant.idPar }}</td>
+                <td>{{ participant.cinPar }}</td>
+                <td>{{ participant.nomPar }}</td>
+                <td>{{ participant.prenomPar }}</td>
+                <td>{{ participant.sexePar }}</td>
+                <td>{{ participant.agePar }}</td>
+                <td>{{ participant.usernamePar }}</td>
+                <td>{{ participant.mdpPar }}</td>
+                <td>{{ participant.numtelPar }}</td>
+                <td>{{ participant.adressPar }}</td>
+                <td>{{ participant.mailPar }}</td>
+                <td>{{ participant.idGroup }}</td>
+                <td>{{ participant.dateInscri ? participant.dateInscri|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('participant_show', {'idPar': participant.idPar}) }}">show</a>
+                    <a href="{{ path('participant_edit', {'idPar': participant.idPar}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('participant_new') }}">Create new</a>
+{% endblock %}
