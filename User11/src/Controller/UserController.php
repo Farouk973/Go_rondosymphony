@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,6 +47,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -101,19 +103,20 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
     }
     /**
-     * @Route("/etat", name="user_etat")
+     * @Route("/e", name="user_etat", methods={"POST"})
      */
-    public function Etat(): Response
+    public function etat( $id,EntityManager $entitymanager )
     {
-       if (User.getEtat()==0){
-           User.setEtat(1);}
-        if (User.getEtat()==1){
-            User.setEtat(0);}
 
-
+       $user= $this->getDoctrine()->getRepository(User::class)->find($id);
+       $user->setEtat(1);
+       $entitymanager->persist($user);
+        $entitymanager->flush();
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
         ]);
+        /*return new Response($user->getNom().'has been blocked',$this->render('user/index.html.twig'))
+        ;*/
     }
 
 

@@ -41,16 +41,19 @@
                 <td>{{ user.adress }}</td>
                 <td>{{ user.mail }}</td>
                 <td>{{ user.idGroup }}</td>
-                <td>{{ user.role.role }}</td>
+                <td>
+                    {{ user.role.role }}
+                </td>
                 <td>{{ user.dateInscri }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
                     {% if user.etat==0 %}
-                    <a href=""onclick="return confirm('Are you sure ?')
-                                        ">blocker</a>
+                    <a href="{{ path('user_etat', {'id': user.id}) }}"onclick="return confirm('Are you sure you want to block this user ?')
+                                        ">block</a>
                     {% elseif user.etat==1%}
-                        <a href="">unblocker</a>
+                        <a href=""onclick="return confirm('Are you sure you want to unblock this user ?')
+                                        " href="">unblock</a>
                     {% endif %}
                 </td>
             </tr>

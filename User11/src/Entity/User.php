@@ -59,9 +59,14 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=3,max=15)
+     * @Assert\Length(min=8,minMessage="8 caractére au minimum")
+     *
      */
     private $mdp;
+    /**
+     * @Assert\EqualTo(propertyPath="confirm_psw",minMessage="les passwords ne sont pas identique")
+     */
+    public $confirm_psw;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -82,8 +87,8 @@ class User
     private $mail;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min=3,max=15)
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default"="NULL"})
+     * @Assert\Length(min=3,max=255)
      */
     private $id_group;
 
@@ -98,24 +103,43 @@ class User
      *
      */
     private $role;
-    protected $captchaCode;
-    Public $etat=0;
 
     /**
-     * @return int
+     *
+     *
+     * @ORM\Column( type="integer", nullable=true, options={"default"=0})
      */
-    public function getEtat(): int
+
+    private $etat;
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
     {
         return $this->etat;
     }
 
     /**
-     * @param int $etat
+     * @param mixed $etat
      */
-    public function setEtat(int $etat): void
+    public function setEtat($etat): void
     {
         $this->etat = $etat;
     }
+
+
+
+
+
+
+
+
+
+    protected $captchaCode;
+
+
+
 
 
 
@@ -292,6 +316,7 @@ class User
     {
         $this->captchaCode = $captchaCode;
     }
+
 
 
 

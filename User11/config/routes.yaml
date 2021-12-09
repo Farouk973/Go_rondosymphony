@@ -5,5 +5,5 @@
 
 
 # /app/config/routes.yaml
-captcha_routing:
- resource: "@CaptchaBundle/Resources/config/routing.yml"
+#captcha_routing:
+# resource: "@CaptchaBundle/Resources/config/routing.yml"

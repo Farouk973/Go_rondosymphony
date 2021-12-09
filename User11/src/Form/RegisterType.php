@@ -4,12 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType;
-use Captcha\Bundle\CaptchaBundle\Validator\Constraints\ValidCaptcha;
 
-class UserType extends AbstractType
+class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,22 +19,16 @@ class UserType extends AbstractType
             ->add('sexe')
             ->add('age')
             ->add('Username')
-            ->add('mdp')
+            ->add('mdp',PasswordType::class)
+            ->add('confirm_psw',PasswordType::class)
             ->add('numtel')
             ->add('adress')
             ->add('mail')
-            ->add('role')
-            ->add('id_group')
-            ->add('date_inscri')
-        /*->add('captchaCode', CaptchaType::class, array(
-            'captchaConfig' => 'ExampleCaptchaUserRegistration',
-            'constraints' => [
-                new ValidCaptcha([
-                    'message' => 'Invalid captcha, please try again',
-                ]),
-            ],
-        ))*/;
 
+
+
+
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
