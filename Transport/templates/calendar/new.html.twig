@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Calendar{% endblock %}
+
+{% block body %}
+    <h1>Create new Calendar</h1>
+
+    {{ include('calendar/_form.html.twig') }}
+    <br><br>
+
+    <a href="/AfficheTransport" class="filled-button">Return </a>
+    <a href="/calendar" class="filled-button">Go to list </a>
+
+{% endblock %}

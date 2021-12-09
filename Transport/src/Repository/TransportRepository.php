@@ -47,4 +47,17 @@ class TransportRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT t
+                FROM TransportController t
+                WHERE t.typeTr LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
 }

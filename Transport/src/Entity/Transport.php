@@ -129,12 +129,12 @@ class Transport
         return $this;
     }
 
-    public function getImageTr(): ?string
+    public function getImageTr()
     {
         return $this->Image_tr;
     }
 
-    public function setImageTr(string $Image_tr): self
+    public function setImageTr( $Image_tr): self
     {
         $this->Image_tr = $Image_tr;
 

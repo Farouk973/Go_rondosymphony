@@ -1,0 +1,30 @@
+
+<h1>Liste de Transport PDF</h1>
+
+
+<table class="myTable">
+    <tr>
+        <th>Prix</th>
+        <th>Type</th>
+        <th>Disponibilite</th>
+        <th>ID_groupe</th>
+        <th>Destination</th>
+        <th>Stock</th>
+        <th>Image</th>
+    </tr>
+    <tr {% for t in Transport%}>
+
+        <td>{{ t.PrixTr }}</td>
+        <td>{{ t.TypeTr }}</td>
+        <td>{{ t.DisponibiliteTr}}</td>
+        <td>{{ t.IdGroupeTr}}</td>
+        <td>{{ t.DestinationTr}}</td>
+        <td>{{ t.StockTr }}</td>
+        <td>{% for image in t.imageTr %}
+                <img src="{{ asset ('/uploads/' ~ image.name ) }}" alt="image" width="150">
+            {% endfor %}
+        </td>
+
+
+    </tr{% endfor %}>
+</table><hr>

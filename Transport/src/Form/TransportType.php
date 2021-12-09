@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Transport;
 use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,7 +28,9 @@ class TransportType extends AbstractType
             ->add('Id_groupe_tr')
             ->add('Destination_tr')
             ->add('Stock_tr')
-            ->add('Image_tr')
+            ->add('Image_tr', FileType::class , array('data_class'=>null, 'required'=>false))
+
+
         ;
     }
 

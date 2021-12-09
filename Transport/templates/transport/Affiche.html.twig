@@ -1,33 +1,153 @@
 {% extends 'index.html.twig' %}
-
     {% block body %}
-<h1>Liste de Transport</h1>
-<table border="1">
 
-    <tr>
-        <th>ID</th>
-        <th>Prix</th>
-        <th>Type</th>
-        <th>Disponibilite</th>
-        <th>ID_groupe</th>
-        <th>Destination</th>
-        <th>Stock</th>
-        <th>Image</th>
-        <th>update</th>
-        <td>Delete</td>
-    </tr>
-    <tr {% for t in Transport%}>
-        <td>{{ t.Id }}</td>
-        <td>{{ t.PrixTr }}</td>
-        <td>{{ t.TypeTr }}</td>
-        <td>{{ t.DisponibiliteTr}}</td>
-        <td>{{ t.IdGroupeTr}}</td>
-        <td>{{ t.DestinationTr}}</td>
-        <td>{{ t.StockTr }}</td>
-        <td>{{ t.ImageTr }}</td>
-        <td><a href="{{ path('update',{'id':t.id}) }}">update</a></td>
-        <td><a href="{{ path('d',{'id':t.id}) }}">Delete</a></td>
+        {% for message in app.flashes('Success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <!-- Start Styles. Move the 'style' tags and everything between them to between the 'head' tags -->
+        <style type="text/css">
+            .myTable { background-color: #ccb59f;border-collapse:collapse; }
+            .myTable th { background-color: #25241b;color: #ded6d6;width:50%; }
+            .myTable td, .myTable th { padding:5px;border:1px solid #211e10; }
+        </style>
+        <!-- End Styles -->
 
-    </tr{% endfor %}>
-</table>
-{% endblock %}
+        <a href="c" class="filled-button">Affiche calendar</a><hr><br>
+
+        <h1>Lists of Transport !</h1>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <h2>Search A Post !!</h2>
+
+                <div class="sidebar-search">
+
+                    <div class="input-group custom-search-form">
+
+                        <input type="text" id="search" class="form-control" placeholder="Search here">
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="#"> Entities<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level" id="entitiesNav">
+                        </ul>
+                    </li>
+                </ul><br><br><br><br>
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        var searchRequest = null;
+                        $("#search").keyup(function() {
+                            var minlength = 1;
+                            var that = this;
+                            var value = $(this).val();
+                            var entitySelector = $("#entitiesNav").html('');
+                            if (value.length >= minlength ) {
+                                if (searchRequest != null)
+                                    searchRequest.abort();
+                                searchRequest = $.ajax({
+                                    type: "GET",
+                                    url: "{{ path('ajax_search') }}",
+                                    data: {
+                                        'q' : value
+                                    },
+                                    dataType: "text",
+                                    success: function(msg){
+                                        //we need to check if the value is the same
+                                        if (value===$(that).val()) {
+                                            var result = JSON.parse(msg);
+                                            $.each(result, function(key, arr) {
+                                                $.each(arr, function(id, value) {
+                                                    if (key === 'Transport') {
+                                                        if (id !== 'error') {
+                                                            console.log(value[1]);
+                                                            entitySelector.append('<li><b>'+value[1]+'</b><a href="/AfficheTransport/'+id+'">'+'<img src="/uploads/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                        } else {
+                                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+
+
+                <div class="post-container">
+                    <div class="row">
+
+
+                        <section class="featured section-padding">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <div class="heading">
+                                            <h1 class="section-title">Latest Transport</h1><br>
+                                            <h4 class="sub-title">You can also post your own Transport</h4><hr><br>
+                                        </div>
+                                    </div>
+
+                                    {% for t in Transport %}
+
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="featured-box">
+                                                <figure>
+                                                    <a href="{{ path('detailedt',{'id': t.id}) }}"><img class="card-img-top" src="{{ asset('uploads/' ~ t.imageTr) }}" alt="Card image cap"></a>
+                                                </figure>
+                                                <div class="content-wrapper">
+                                                    <div class="feature-content">
+                                                        <h4><a href="{{ path('detailedt',{'id': t.id}) }}">->{{ t.typeTr }}</a></h4>
+                                                        <p class="listing-tagline">-{{ t.prixTr }} $</p>
+                                                        <div class="meta-tag">
+                                                            <div class="listing-review">
+                                                                <span class="review-avg">4.5</span>
+                                                                2 Ratings
+                                                            </div>
+                                                            <div class="user-name">
+                                                                <a href="#"><i class="lni-user"></i>-{{ t.destinationTr }}</a>
+                                                            </div>
+                                                            <div class="listing-category">
+                                                                <a href="#"><i class="lni-alarm-clock"></i>-{{ t.disponibiliteTr }} </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="listing-bottom clearfix">
+                                                        <div class="btn-group">
+                                                            <a href="{{ path('AfficheTransport',{'id': t.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+
+                        </section>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <a href="transport/Add" class="filled-button">Add Transport</a>  <a href="/calendar/new" class="filled-button">Add Calendar</a>
+
+    {% endblock %}

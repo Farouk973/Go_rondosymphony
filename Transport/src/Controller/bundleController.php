@@ -37,5 +37,6 @@ class bundleController extends AbstractController
             'controller_name' => 'bundleController',
         ]);
     }
+}
 
-    }
+

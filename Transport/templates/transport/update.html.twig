@@ -1,6 +1,57 @@
 {% extends 'index.html.twig' %}
- {% block body %}
-<h1>update Transport</h1>
+{% block body %}
 
-{{ form(f) }}
+
+    <div class="row small-spacing">
+        <div class="col-xs-10">
+            <div class="box-content card black">
+                <h4 class="box-title">update Transport</h4>
+                <br>
+                <!-- /.box-title -->
+                <div class="card-content">
+
+                    {{ form_start(form) }}
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Prix_tr) }}</label>
+                        {{ form_widget(form.Prix_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter prix', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Type_tr) }}</label>
+                        {{ form_widget(form.Type_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter type', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Disponibilite_tr) }}</label>
+                        {{ form_widget(form.Disponibilite_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter disponibilite', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Id_groupe_tr) }}</label>
+                        {{ form_widget(form.Id_groupe_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter id groupe', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Destination_tr) }}</label>
+                        {{ form_widget(form.Destination_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter destination', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Stock_tr) }}</label>
+                        {{ form_widget(form.Stock_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter stock', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{ form_label(form.Image_tr) }}</label>
+                        {{ form_widget(form.Image_tr, {'attr': {'class': 'form-control', 'placeholder': 'Enter image', 'id': 'exampleInputEmail1', 'type': 'text'}}) }}
+                    </div>
+                    <br>
+                </div>
+
+                {{ form_row(form.update, {'attr': {'class': 'btn btn-primary btn-sm waves-effect waves-light'}, 'label': 'update' }) }}
+
+                {{ form_end(form) }}
+            </div>
+            <!-- /.card-content -->
+        </div>
+        <!-- /.box-content -->
+    </div>
+
+    </div>
  {% endblock %}

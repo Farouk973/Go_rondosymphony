@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+    <h1> Transport Details </h1><hr><br><br>
+
+
+    <div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4">->{{ Type_tr|upper }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+
+            <a href="{{ path('AfficheTransport') }}"class="filled-button">Go Home</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <h6>->{{ Disponibilite_tr }}</h6>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="{{ asset('uploads/' ~ Image_tr) }}" alt="{{ Type_tr }}">
+
+        <hr><br>
+
+        <!-- Post Content -->
+        <h6 class="">->{{ Destination_tr }}</h6><hr>
+
+        <h6 class="">->{{ Prix_tr }}$</h6><hr>
+
+        <h6 class="">->{{ Id_groupe_tr }}</h6><hr>
+
+        <h6 class="">->{{ Stock_tr }}  Place</h6><hr>
+
+
+
+        <hr>
+
+
+
+
+
+
+        </div>
+        <br><br><br><br><br>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+
+
+
+
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

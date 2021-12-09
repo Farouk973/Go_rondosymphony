@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar List {% endblock %}
+
+{% block body %}
+    <h1>Calendar List</h1><br>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: #9fcdff;
+            color: #fff;
+            background-color: #724646;
+            border: none;
+            border-radius: 70px;
+            box-shadow: 0 5px #a6a2a2;
+        }
+
+        .button:hover {background-color: #ded6d6
+        }
+
+        .button:active {
+            background-color: #a9a9a9;
+            box-shadow: 0 2px #666;
+            transform: translateY(4px);
+        }
+    </style>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Description</th>
+                <th>All_day</th>
+                <th>Background_color</th>
+                <th>Border_color</th>
+                <th>Text_color</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>{{ calendar.allDay ? 'Yes' : 'No' }}</td>
+                <td>{{ calendar.backgroundColor }}</td>
+                <td>{{ calendar.borderColor }}</td>
+                <td>{{ calendar.textColor }}</td>
+                <td>
+                    <a href="{{ path('calendar_show', {'id': calendar.id}) }}"class="button">show</a> <hr><a href="{{ path('calendar_edit', {'id': calendar.id}) }}"class="button">edit</a>
+
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   <hr>
+
+
+    <a href="/calendar/new" class="filled-button">Create new </a>
+
+{% endblock %}
